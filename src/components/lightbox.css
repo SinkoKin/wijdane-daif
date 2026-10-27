@@ -1,0 +1,237 @@
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9100;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: clamp(12px, 2vh, 24px);
+  padding: clamp(16px, 2.6vw, 34px) var(--gutter) clamp(16px, 2.4vw, 28px);
+  background:
+    radial-gradient(70% 70% at 50% 40%, rgba(26, 21, 16, 0.92), transparent 75%),
+    #050403;
+  color: var(--ivory);
+  animation: lightboxIn 0.4s ease both;
+}
+
+.lightbox__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.lightbox__count {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  line-height: 1;
+  color: var(--ivory);
+}
+
+.lightbox__count i {
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.lightbox__close {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  border: 1px solid rgba(244, 239, 230, 0.22);
+  border-radius: 999px;
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+}
+
+.lightbox__close:hover {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.lightbox__stage {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) 52px;
+  align-items: center;
+  gap: clamp(10px, 2vw, 26px);
+  min-height: 0;
+}
+
+.lightbox__nav {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(244, 239, 230, 0.24);
+  border-radius: 50%;
+  color: var(--ivory);
+  transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+}
+
+.lightbox__nav:hover {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.lightbox__nav--prev {
+  justify-self: start;
+}
+
+.lightbox__nav--next {
+  justify-self: end;
+}
+
+.lightbox__figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  animation: lightboxFrame 0.55s var(--ease-out) both;
+}
+
+.lightbox__figure img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: calc(100svh - 210px);
+  object-fit: contain;
+}
+
+.lightbox__figure figcaption {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 14px;
+  text-align: center;
+}
+
+.lightbox__title {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1;
+}
+
+.lightbox__meta {
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.17em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.lightbox__hint {
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  line-height: 1.8;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+
+.lightbox__hint kbd {
+  font-family: var(--font-sans);
+  font-size: 8px;
+  padding: 1px 5px;
+  border: 1px solid rgba(244, 239, 230, 0.2);
+  border-radius: 3px;
+  color: var(--muted);
+}
+
+@keyframes lightboxIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lightboxFrame {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .lightbox {
+    padding: 14px 16px calc(16px + env(safe-area-inset-bottom));
+    gap: 10px;
+  }
+
+  .lightbox__stage {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+    position: relative;
+  }
+
+  .lightbox__figure {
+    grid-row: 1;
+  }
+
+  .lightbox__figure img {
+    max-height: calc(100svh - 230px);
+  }
+
+  .lightbox__figure figcaption {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .lightbox__nav {
+    position: fixed;
+    bottom: calc(64px + env(safe-area-inset-bottom));
+    z-index: 2;
+    width: 42px;
+    height: 42px;
+    background: rgba(11, 10, 8, 0.6);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  .lightbox__nav--prev {
+    left: 16px;
+  }
+
+  .lightbox__nav--next {
+    right: 16px;
+  }
+
+  .lightbox__hint {
+    display: none;
+  }
+
+  .lightbox__close span {
+    display: none;
+  }
+
+  .lightbox__close {
+    padding: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox,
+  .lightbox__figure {
+    animation: none;
+  }
+}

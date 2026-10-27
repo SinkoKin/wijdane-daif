@@ -1,0 +1,266 @@
+/* ==========================================================================
+   PRELOADER — Wijdane Daif
+   Premium loading experience with Arabic logo, ambient breath,
+   and cinematic reveal choreography.
+   ========================================================================== */
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Accent wash — gold gradient that retreats with the panel */
+.preloader__accent {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(110% 110% at 65% 15%, rgba(231, 210, 169, 0.18), transparent 55%),
+    radial-gradient(90% 90% at 35% 85%, rgba(217, 189, 136, 0.14), transparent 60%),
+    linear-gradient(180deg, #0b0a08 0%, #0b0a08 100%);
+  will-change: transform;
+}
+
+/* Main panel — ink background with subtle radial warmth */
+.preloader__panel {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--ink);
+  color: var(--ivory);
+  will-change: transform;
+}
+
+.preloader__panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(80% 70% at 82% 8%, rgba(198, 161, 91, 0.14), transparent 60%),
+    radial-gradient(70% 60% at 10% 90%, rgba(169, 84, 47, 0.14), transparent 65%);
+  pointer-events: none;
+}
+
+/* Content grid — centered vertical rhythm */
+.preloader__content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: clamp(20px, 3.5vh, 40px);
+  height: 100%;
+  padding: clamp(24px, 4vh, 50px) var(--gutter);
+}
+
+/* Center — logo + arabic + tagline */
+.preloader__center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 3vh, 32px);
+  min-height: 0;
+}
+
+/* Arabic logo — breathes with subtle glow pulse */
+.preloader__logo {
+  opacity: 0;
+  transform: scale(0.8);
+  filter: drop-shadow(0 0 24px rgba(198, 161, 91, 0.3));
+  will-change: transform, opacity, filter;
+}
+
+.preloader__logo svg {
+  display: block;
+}
+
+/* Arabic name in Ruqaa — set in gold, the brand's true voice */
+.preloader__arabic {
+  margin: 0;
+  font-family: var(--font-arabic);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--gold);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: transform, opacity;
+  letter-spacing: 0.02em;
+}
+
+/* Eyebrow — the promise */
+.preloader__eyebrow {
+  margin: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1rem, 1.6vw, 1.3rem);
+  letter-spacing: 0.02em;
+  color: var(--gold-soft);
+  opacity: 0;
+  transform: translateY(16px);
+  will-change: transform, opacity;
+}
+
+/* Tagline — official world + year */
+.preloader__tagline {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0;
+  transform: translateY(12px);
+  will-change: transform, opacity;
+}
+
+.preloader__tagline-accent {
+  color: var(--gold-soft);
+}
+
+.preloader__tagline-year {
+  color: var(--muted-2);
+}
+
+/* Bottom — counter + progress bar */
+.preloader__bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.preloader__count {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  line-height: 1;
+  color: var(--ivory);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+}
+
+/* Progress bar — gold fill */
+.preloader__bar {
+  position: relative;
+  width: 100%;
+  height: 1px;
+  background: rgba(244, 239, 230, 0.12);
+  overflow: hidden;
+}
+
+.preloader__bar span {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #c9a227, #e8c766);
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 700px) {
+  .preloader__logo {
+    width: 64px;
+    height: 64px;
+  }
+
+  .preloader__arabic {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+
+  .preloader__eyebrow {
+    font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+  }
+
+  .preloader__tagline {
+    font-size: 7.5px;
+    letter-spacing: 0.18em;
+    gap: 10px;
+  }
+
+  .preloader__content {
+    gap: clamp(16px, 3vh, 28px);
+    padding: clamp(20px, 3.5vw, 36px) var(--gutter);
+  }
+}
+
+@media (max-width: 420px) {
+  .preloader__logo {
+    width: 56px;
+    height: 56px;
+  }
+
+  .preloader__arabic {
+    font-size: clamp(1.8rem, 7vw, 2.4rem);
+  }
+
+  .preloader__count {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+  }
+
+  .preloader__bar {
+    height: 1px;
+  }
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader__logo,
+  .preloader__arabic,
+  .preloader__eyebrow,
+  .preloader__tagline {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .preloader__bar span {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   HIGH CONTRAST / PRINT
+   ========================================================================== */
+
+@media (forced-colors: active) {
+  .preloader__accent {
+    background: Canvas;
+  }
+
+  .preloader__panel {
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  .preloader__arabic,
+  .preloader__tagline-accent {
+    color: CanvasText;
+  }
+
+  .preloader__bar span {
+    background: CanvasText;
+  }
+}
+
+@media print {
+  .preloader {
+    display: none;
+  }
+}
