@@ -280,6 +280,16 @@
   color: var(--muted-2);
 }
 
+.contact__credit {
+  color: var(--muted);
+  transition: color 0.3s ease;
+}
+
+.contact__credit:hover,
+.contact__credit:focus-visible {
+  color: var(--gold);
+}
+
 .contact__top {
   display: inline-flex;
   align-items: center;

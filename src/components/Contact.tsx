@@ -116,6 +116,14 @@ export function Contact() {
           <span className="contact__footer-center">
             Official artist world — Morocco
           </span>
+          <a
+            className="contact__credit"
+            href="https://www.instagram.com/yovsses/"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            Created by @yovsses
+          </a>
           <button
             type="button"
             className="contact__top"
